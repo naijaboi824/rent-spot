@@ -96,12 +96,20 @@ let selectedListing = listings[0];
 let activeThreadId = threads[0].id;
 
 const splash = document.getElementById("splash");
+const menuToggle = document.getElementById("menuToggle");
+const navBackdrop = document.getElementById("navBackdrop");
+const brandHomeBtn = document.getElementById("brandHomeBtn");
 const navButtons = document.querySelectorAll(".screen-nav__item");
 const screens = document.querySelectorAll(".screen");
 const featuredGrid = document.getElementById("featuredGrid");
 const nearGrid = document.getElementById("nearGrid");
 const searchResults = document.getElementById("searchResults");
 const resultCount = document.getElementById("resultCount");
+
+function setMenuOpen(open) {
+  document.body.classList.toggle("nav-open", open);
+  menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+}
 
 function currency(value) {
   return `R ${value.toLocaleString("en-ZA")}`;
@@ -203,26 +211,53 @@ function activateScreen(id) {
 }
 
 function setupNavigation() {
+  brandHomeBtn.addEventListener("click", () => {
+    activateScreen("home");
+    setMenuOpen(false);
+  });
+
+  brandHomeBtn.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      activateScreen("home");
+      setMenuOpen(false);
+    }
+  });
+
+  menuToggle.addEventListener("click", () => {
+    const willOpen = !document.body.classList.contains("nav-open");
+    setMenuOpen(willOpen);
+  });
+
+  navBackdrop.addEventListener("click", () => setMenuOpen(false));
+
   navButtons.forEach((button) => {
     button.addEventListener("click", () => {
       if (button.dataset.target === "post") {
         activateScreen("listing-login");
+        setMenuOpen(false);
         return;
       }
       activateScreen(button.dataset.target);
+      setMenuOpen(false);
     });
   });
 
-  document.getElementById("quickAddBtn").addEventListener("click", () => activateScreen("listing-login"));
+  document.getElementById("quickAddBtn").addEventListener("click", () => {
+    activateScreen("listing-login");
+    setMenuOpen(false);
+  });
 
   document.querySelectorAll(".flow-card[data-target]").forEach((card) => {
     card.addEventListener("click", () => {
       const target = card.dataset.target;
       if (target === "post") {
         activateScreen("listing-login");
+        setMenuOpen(false);
         return;
       }
       activateScreen(target);
+      setMenuOpen(false);
     });
   });
 }
@@ -378,7 +413,7 @@ function init() {
   // Short splash to mimic first-time app launch.
   setTimeout(() => {
     splash.classList.add("is-hidden");
-  }, 1200);
+  }, 8000);
 }
 
 init();

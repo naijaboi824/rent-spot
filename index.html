@@ -15,32 +15,24 @@
   <body>
     <div class="splash" id="splash" aria-live="polite">
       <div class="splash__card">
-        <div class="brand__mark" aria-hidden="true">
-          <span class="brand__roof"></span>
-          <span class="brand__pin"></span>
-        </div>
-        <h1>RentSpot</h1>
-        <p>Find your next home, fast.</p>
+        <img src="assets/rentspot-logo.svg" alt="RentSpot" class="splash__logo" />
       </div>
     </div>
 
     <header class="topbar">
-      <div class="brand">
-        <div class="brand__mark" aria-hidden="true">
-          <span class="brand__roof"></span>
-          <span class="brand__pin"></span>
-        </div>
-        <div>
-          <h1>RentSpot</h1>
-          <p>Trust. Simplicity. Home.</p>
-        </div>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="appNavPanel" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="brand" id="brandHomeBtn" role="button" tabindex="0" aria-label="Go to Home">
+        <img src="assets/rentspot-logo.svg" alt="RentSpot" class="site-logo" />
       </div>
       <button class="btn btn--primary" id="quickAddBtn">+ Add Listing</button>
     </header>
 
     <main class="layout">
-      <aside class="nav-panel">
-        <p class="nav-panel__title">App Flow</p>
+      <aside class="nav-panel" id="appNavPanel">
         <nav id="screenNav" class="screen-nav" aria-label="Primary">
           <button class="screen-nav__item is-active" data-target="home">Home</button>
           <button class="screen-nav__item" data-target="search">Search</button>
@@ -382,6 +374,7 @@
         </article>
       </section>
     </main>
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
     <script src="app.js"></script>
   </body>
