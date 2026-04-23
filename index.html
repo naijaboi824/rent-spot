@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentSpot - Find and List Property</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="splash" id="splash" aria-live="polite">
+      <div class="splash__card">
+        <div class="brand__mark" aria-hidden="true">
+          <span class="brand__roof"></span>
+          <span class="brand__pin"></span>
+        </div>
+        <h1>RentSpot</h1>
+        <p>Find your next home, fast.</p>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand__mark" aria-hidden="true">
+          <span class="brand__roof"></span>
+          <span class="brand__pin"></span>
+        </div>
+        <div>
+          <h1>RentSpot</h1>
+          <p>Trust. Simplicity. Home.</p>
+        </div>
+      </div>
+      <button class="btn btn--primary" id="quickAddBtn">+ Add Listing</button>
+    </header>
+
+    <main class="layout">
+      <aside class="nav-panel">
+        <p class="nav-panel__title">App Flow</p>
+        <nav id="screenNav" class="screen-nav" aria-label="Primary">
+          <button class="screen-nav__item is-active" data-target="onboarding">First-Time User</button>
+          <button class="screen-nav__item" data-target="home">Home</button>
+          <button class="screen-nav__item" data-target="search">Search</button>
+          <button class="screen-nav__item" data-target="details">Property Details</button>
+          <button class="screen-nav__item" data-target="post">Post Listing</button>
+          <button class="screen-nav__item" data-target="messages">Messages</button>
+          <button class="screen-nav__item" data-target="profile">Profile</button>
+        </nav>
+      </aside>
+
+      <section class="screens">
+        <article class="screen is-active" id="onboarding">
+          <div class="screen__head">
+            <h2>First-Time User Experience</h2>
+            <p>Splash, welcome choices, and quick signup/login.</p>
+          </div>
+
+          <div class="cards cols-2">
+            <section class="card card--welcome reveal">
+              <h3>Welcome</h3>
+              <p>Choose your path in one tap.</p>
+              <div class="cta-grid">
+                <button class="btn btn--primary">Find a place</button>
+                <button class="btn btn--ghost">List a property</button>
+              </div>
+            </section>
+
+            <section class="card reveal">
+              <h3>Sign Up / Login</h3>
+              <form class="form-grid" id="authForm">
+                <label>
+                  Phone Number
+                  <input type="tel" placeholder="e.g. +27 82 123 4567" required />
+                </label>
+                <button class="btn btn--soft" type="button">Send OTP</button>
+                <p class="muted center">or continue with email</p>
+                <label>
+                  Email Address
+                  <input type="email" placeholder="name@email.com" required />
+                </label>
+                <button class="btn btn--primary" type="submit">Continue</button>
+              </form>
+            </section>
+          </div>
+        </article>
+
+        <article class="screen" id="home">
+          <div class="screen__head">
+            <h2>Home Screen</h2>
+            <p>Search, categories, featured picks, and nearby options.</p>
+          </div>
+
+          <section class="card reveal">
+            <div class="search-line">
+              <input id="homeSearch" type="search" placeholder="Search location, suburb, or landmark" />
+              <button class="btn btn--primary" id="homeSearchBtn">Search</button>
+            </div>
+
+            <div class="chip-row">
+              <button class="chip is-selected" data-type="house">Rent a House</button>
+              <button class="chip" data-type="room">Rent a Room</button>
+              <button class="chip" data-type="buy">Buy Property</button>
+            </div>
+          </section>
+
+          <div class="cards cols-2">
+            <section class="card reveal">
+              <h3>Featured Listings</h3>
+              <div id="featuredGrid" class="listing-grid"></div>
+            </section>
+
+            <section class="card reveal">
+              <h3>Near You</h3>
+              <div id="nearGrid" class="listing-grid"></div>
+            </section>
+          </div>
+        </article>
+
+        <article class="screen" id="search">
+          <div class="screen__head">
+            <h2>Search Flow</h2>
+            <p>Type location, filter by budget and type, then open details.</p>
+          </div>
+
+          <section class="card reveal">
+            <div class="form-grid filters-grid">
+              <label>
+                Location
+                <input id="locationInput" type="text" placeholder="Cape Town" value="Cape Town" />
+              </label>
+              <label>
+                Max Price (R)
+                <input id="priceInput" type="number" min="0" step="500" value="12000" />
+              </label>
+              <label>
+                Rooms
+                <select id="roomsInput">
+                  <option value="any">Any</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3+</option>
+                </select>
+              </label>
+              <label>
+                Type
+                <select id="typeInput">
+                  <option value="any">Any</option>
+                  <option value="house">Rent a House</option>
+                  <option value="room">Rent a Room</option>
+                  <option value="buy">Buy Property</option>
+                </select>
+              </label>
+            </div>
+            <button class="btn btn--primary" id="applySearchBtn">Apply Filters</button>
+          </section>
+
+          <section class="card reveal">
+            <div class="stack-head">
+              <h3>Results</h3>
+              <span class="muted" id="resultCount">0 properties</span>
+            </div>
+            <div id="searchResults" class="listing-grid listing-grid--wide"></div>
+          </section>
+        </article>
+
+        <article class="screen" id="details">
+          <div class="screen__head">
+            <h2>Property Details</h2>
+            <p>Image gallery, price, map preview, and direct contact actions.</p>
+          </div>
+
+          <section class="card reveal">
+            <div class="gallery" id="imageGallery"></div>
+            <div class="details-row">
+              <div>
+                <h3 id="detailsTitle">Select a property</h3>
+                <p class="price" id="detailsPrice">R 0</p>
+                <p class="muted" id="detailsLocation">-</p>
+              </div>
+              <button class="btn btn--soft" id="saveBtn" type="button">Save</button>
+            </div>
+            <p id="detailsDescription" class="description">Property description appears here after you choose a listing.</p>
+
+            <div class="map-box" id="mapBox">
+              <p>Location map preview</p>
+              <span id="mapText">No location selected.</span>
+            </div>
+
+            <div class="cta-grid cta-grid--3">
+              <button class="btn btn--ghost">Chat</button>
+              <button class="btn btn--ghost">Call</button>
+              <button class="btn btn--primary">Request Viewing</button>
+            </div>
+          </section>
+        </article>
+
+        <article class="screen" id="post">
+          <div class="screen__head">
+            <h2>Post a Listing</h2>
+            <p>Pick a listing package, add details, then continue to payment.</p>
+          </div>
+
+          <section class="card reveal">
+            <h3>Choose Listing Type</h3>
+            <div class="plan-grid" id="planGrid">
+              <label class="plan is-selected">
+                <input type="radio" name="plan" value="room" checked />
+                <strong>Room</strong>
+                <span>R50</span>
+              </label>
+              <label class="plan">
+                <input type="radio" name="plan" value="house" />
+                <strong>Rental House</strong>
+                <span>R70</span>
+              </label>
+              <label class="plan">
+                <input type="radio" name="plan" value="sale" />
+                <strong>Sale</strong>
+                <span>R100</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="card reveal">
+            <h3>Listing Form</h3>
+            <form id="listingForm" class="form-grid">
+              <label>
+                Title
+                <input type="text" required placeholder="Cozy room near city center" />
+              </label>
+              <label>
+                Description
+                <textarea rows="4" required placeholder="Describe the property, amenities, and nearby features"></textarea>
+              </label>
+              <label>
+                Price (R)
+                <input type="number" min="0" step="100" required placeholder="7500" />
+              </label>
+              <label>
+                Location
+                <input type="text" required placeholder="Cape Town" />
+              </label>
+              <label>
+                Photos Upload
+                <input type="file" multiple accept="image/*" />
+              </label>
+              <button class="btn btn--primary" type="submit">Continue to Payment</button>
+            </form>
+          </section>
+
+          <section class="card reveal hidden" id="paymentCard">
+            <h3>Payment</h3>
+            <p class="muted">Choose payment method</p>
+            <div class="chip-row">
+              <button class="chip is-selected" data-payment="card">Card</button>
+              <button class="chip" data-payment="eft">EFT</button>
+            </div>
+            <button class="btn btn--primary" id="payBtn" type="button">Pay and Submit Listing</button>
+            <p class="status" id="reviewStatus"></p>
+          </section>
+        </article>
+
+        <article class="screen" id="messages">
+          <div class="screen__head">
+            <h2>Messages</h2>
+            <p>Inbox list and chat UI inspired by modern messaging apps.</p>
+          </div>
+
+          <section class="card reveal chat-layout">
+            <aside class="inbox" id="inboxList"></aside>
+            <section class="chat" id="chatPanel">
+              <div class="chat__head" id="chatHead">Select a conversation</div>
+              <div class="chat__body" id="chatBody"></div>
+              <form class="chat__composer" id="chatForm">
+                <input id="chatInput" type="text" placeholder="Type message..." />
+                <button class="btn btn--primary" type="submit">Send</button>
+              </form>
+            </section>
+          </section>
+        </article>
+
+        <article class="screen" id="profile">
+          <div class="screen__head">
+            <h2>Profile</h2>
+            <p>Manage listings, saved properties, and payment history.</p>
+          </div>
+
+          <div class="cards cols-2">
+            <section class="card reveal">
+              <h3>My Listings</h3>
+              <ul class="list">
+                <li>Room in Observatory - Under Review</li>
+                <li>2-Bed Apartment in Claremont - Live</li>
+              </ul>
+              <button class="btn btn--ghost">Manage Listings</button>
+            </section>
+
+            <section class="card reveal">
+              <h3>Saved Properties</h3>
+              <ul class="list">
+                <li>Family Home in Bellville</li>
+                <li>Studio near UCT</li>
+              </ul>
+              <button class="btn btn--ghost">View Saved</button>
+            </section>
+
+            <section class="card reveal">
+              <h3>Edit Profile</h3>
+              <ul class="list">
+                <li>Name, phone, and email</li>
+                <li>Verification and identity</li>
+              </ul>
+              <button class="btn btn--ghost">Edit Profile</button>
+            </section>
+
+            <section class="card reveal">
+              <h3>Payment History</h3>
+              <ul class="list">
+                <li>Room Listing Fee - R50</li>
+                <li>Rental House Listing Fee - R70</li>
+              </ul>
+              <button class="btn btn--ghost">Download Receipts</button>
+            </section>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
