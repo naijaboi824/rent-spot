@@ -42,8 +42,7 @@
       <aside class="nav-panel">
         <p class="nav-panel__title">App Flow</p>
         <nav id="screenNav" class="screen-nav" aria-label="Primary">
-          <button class="screen-nav__item is-active" data-target="onboarding">First-Time User</button>
-          <button class="screen-nav__item" data-target="home">Home</button>
+          <button class="screen-nav__item is-active" data-target="home">Home</button>
           <button class="screen-nav__item" data-target="search">Search</button>
           <button class="screen-nav__item" data-target="details">Property Details</button>
           <button class="screen-nav__item" data-target="post">Post Listing</button>
@@ -53,7 +52,7 @@
       </aside>
 
       <section class="screens">
-        <article class="screen is-active" id="onboarding">
+        <article class="screen" id="onboarding">
           <div class="screen__head">
             <h2>First-Time User Experience</h2>
             <p>Splash, welcome choices, and quick signup/login.</p>
@@ -116,7 +115,7 @@
           </section>
         </article>
 
-        <article class="screen" id="home">
+        <article class="screen is-active" id="home">
           <div class="screen__head">
             <h2>Home Screen</h2>
             <p>Search, categories, featured picks, and nearby options.</p>
@@ -132,6 +131,32 @@
               <button class="chip is-selected" data-type="house">Rent a House</button>
               <button class="chip" data-type="room">Rent a Room</button>
               <button class="chip" data-type="buy">Buy Property</button>
+            </div>
+          </section>
+
+          <section class="card reveal">
+            <h3 class="section-label">Quick Access</h3>
+            <div class="flow-grid">
+              <button class="flow-card flow-card--search" data-target="search">
+                <span class="flow-card__icon">🔍</span>
+                <span class="flow-card__name">Search</span>
+              </button>
+              <button class="flow-card flow-card--details" data-target="details">
+                <span class="flow-card__icon">🏠</span>
+                <span class="flow-card__name">Property Details</span>
+              </button>
+              <button class="flow-card flow-card--post" data-target="post">
+                <span class="flow-card__icon">📋</span>
+                <span class="flow-card__name">Post Listing</span>
+              </button>
+              <button class="flow-card flow-card--messages" data-target="messages">
+                <span class="flow-card__icon">💬</span>
+                <span class="flow-card__name">Messages</span>
+              </button>
+              <button class="flow-card flow-card--profile" data-target="profile">
+                <span class="flow-card__icon">👤</span>
+                <span class="flow-card__name">Profile</span>
+              </button>
             </div>
           </section>
 

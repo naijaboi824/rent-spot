@@ -214,6 +214,17 @@ function setupNavigation() {
   });
 
   document.getElementById("quickAddBtn").addEventListener("click", () => activateScreen("listing-login"));
+
+  document.querySelectorAll(".flow-card[data-target]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const target = card.dataset.target;
+      if (target === "post") {
+        activateScreen("listing-login");
+        return;
+      }
+      activateScreen(target);
+    });
+  });
 }
 
 function setupCategoryChips() {
