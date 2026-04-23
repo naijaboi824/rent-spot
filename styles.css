@@ -61,7 +61,7 @@ p {
 }
 
 .splash__logo {
-  width: min(560px, 82vw);
+  width: min(300px, 58vw);
   height: auto;
   filter: drop-shadow(0 16px 36px rgba(8, 27, 67, 0.25));
 }
@@ -114,7 +114,7 @@ p {
 }
 
 .site-logo {
-  width: clamp(150px, 18vw, 230px);
+  width: clamp(72px, 9vw, 100px);
   height: auto;
   display: block;
 }
@@ -684,11 +684,11 @@ label {
 
 @media (max-width: 980px) {
   .splash__logo {
-    width: min(460px, 88vw);
+    width: min(220px, 62vw);
   }
 
   .site-logo {
-    width: clamp(130px, 34vw, 190px);
+    width: clamp(64px, 21vw, 90px);
   }
 
   .menu-toggle {
