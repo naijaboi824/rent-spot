@@ -1,13 +1,13 @@
 const listings = [
   {
     id: 1,
-    title: "Modern Studio in Sea Point",
+    title: "Modern Studio in Strand",
     price: 9200,
     location: "Cape Town",
-    area: "Sea Point",
+    area: "Strand",
     rooms: 1,
     type: "room",
-    description: "Bright studio with fast internet, secure access, and a short walk to the promenade.",
+    description: "Bright studio with fast internet, secure access, and quick access to Strand beachfront.",
     images: [
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80",
@@ -18,13 +18,13 @@ const listings = [
   },
   {
     id: 2,
-    title: "Family House with Garden",
+    title: "Family House in Somerset West",
     price: 18500,
     location: "Cape Town",
-    area: "Rondebosch",
+    area: "Somerset West",
     rooms: 3,
     type: "house",
-    description: "Spacious 3-bedroom house, pet-friendly, with covered parking and quiet neighborhood.",
+    description: "Spacious 3-bedroom house, pet-friendly, with covered parking in a quiet Somerset West neighborhood.",
     images: [
       "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=900&q=80",
@@ -35,13 +35,13 @@ const listings = [
   },
   {
     id: 3,
-    title: "Room Near Campus",
+    title: "Room in Gordon's Bay",
     price: 6800,
     location: "Cape Town",
-    area: "Observatory",
+    area: "Gordon's Bay",
     rooms: 1,
     type: "room",
-    description: "Single room in shared house, close to transport and shops, ideal for students.",
+    description: "Single room in a shared home near transport and shops in Gordon's Bay.",
     images: [
       "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80",
@@ -52,13 +52,13 @@ const listings = [
   },
   {
     id: 4,
-    title: "Townhouse for Sale",
+    title: "Townhouse for Sale in Strand",
     price: 1450000,
     location: "Cape Town",
-    area: "Durbanville",
+    area: "Strand",
     rooms: 3,
     type: "buy",
-    description: "Secure townhouse in a gated estate with private patio and modern finishes.",
+    description: "Secure townhouse in a gated estate in Strand with private patio and modern finishes.",
     images: [
       "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=80",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
@@ -228,7 +228,7 @@ function setupSearchActions() {
 
   document.getElementById("homeSearchBtn").addEventListener("click", () => {
     const val = document.getElementById("homeSearch").value.trim();
-    document.getElementById("locationInput").value = val || "Cape Town";
+    document.getElementById("locationInput").value = val || "Strand";
     activateScreen("search");
     renderResults();
   });
