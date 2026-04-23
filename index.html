@@ -65,7 +65,7 @@
               <p>Choose your path in one tap.</p>
               <div class="cta-grid">
                 <button class="btn btn--primary">Find a place</button>
-                <button class="btn btn--ghost">List a property</button>
+                <button class="btn btn--ghost" id="openListingLoginBtn">List a property</button>
               </div>
             </section>
 
@@ -86,6 +86,34 @@
               </form>
             </section>
           </div>
+        </article>
+
+        <article class="screen" id="listing-login">
+          <div class="screen__head">
+            <h2>Login To Create Listing</h2>
+            <p>Please sign in first before posting a room, rental house, or property for sale.</p>
+          </div>
+
+          <section class="card reveal">
+            <h3>Access Your Listing Account</h3>
+            <form class="form-grid" id="listingLoginForm">
+              <label>
+                Phone Number
+                <input type="tel" placeholder="e.g. +27 82 123 4567" required />
+              </label>
+              <button class="btn btn--soft" type="button">Send OTP</button>
+              <p class="muted center">or continue with email</p>
+              <label>
+                Email Address
+                <input type="email" placeholder="name@email.com" required />
+              </label>
+              <label>
+                Password
+                <input type="password" placeholder="Enter your password" required />
+              </label>
+              <button class="btn btn--primary" type="submit">Login And Continue</button>
+            </form>
+          </section>
         </article>
 
         <article class="screen" id="home">

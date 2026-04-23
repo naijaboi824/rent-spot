@@ -204,10 +204,16 @@ function activateScreen(id) {
 
 function setupNavigation() {
   navButtons.forEach((button) => {
-    button.addEventListener("click", () => activateScreen(button.dataset.target));
+    button.addEventListener("click", () => {
+      if (button.dataset.target === "post") {
+        activateScreen("listing-login");
+        return;
+      }
+      activateScreen(button.dataset.target);
+    });
   });
 
-  document.getElementById("quickAddBtn").addEventListener("click", () => activateScreen("post"));
+  document.getElementById("quickAddBtn").addEventListener("click", () => activateScreen("listing-login"));
 }
 
 function setupCategoryChips() {
@@ -322,6 +328,15 @@ function setupAuthForm() {
   document.getElementById("authForm").addEventListener("submit", (event) => {
     event.preventDefault();
     activateScreen("home");
+  });
+
+  document.getElementById("openListingLoginBtn").addEventListener("click", () => {
+    activateScreen("listing-login");
+  });
+
+  document.getElementById("listingLoginForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    activateScreen("post");
   });
 }
 
