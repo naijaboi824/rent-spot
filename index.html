@@ -3,378 +3,481 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RentSpot - Find and List Property</title>
+    <title>RentSpot</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0&family=Outfit:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="splash" id="splash" aria-live="polite">
-      <div class="splash__card">
-        <img src="assets/rentspot-logo.svg" alt="RentSpot" class="splash__logo" />
-      </div>
+    <div class="app-shell">
+      <main class="phone-app" id="app">
+        <div class="status-bar" aria-hidden="true">
+          <span class="status-bar__time">9:41</span>
+          <div class="status-bar__icons">
+            <span class="material-symbols-rounded">signal_cellular_alt</span>
+            <span class="material-symbols-rounded">wifi</span>
+            <span class="material-symbols-rounded">battery_5_bar</span>
+          </div>
+        </div>
+
+        <header class="hero-top">
+          <button class="icon-button icon-button--surface" id="menuButton" type="button" aria-label="Open navigation menu">
+            <span class="material-symbols-rounded">menu</span>
+          </button>
+
+          <button class="brand-button" data-action="home" id="homeBrandButton" type="button" aria-label="Go to home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="brandMarkGradient" x1="10" y1="8" x2="54" y2="52" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#1060d6" />
+                    <stop offset="1" stop-color="#10b64d" />
+                  </linearGradient>
+                </defs>
+                <path d="M16 12C16 9.791 17.791 8 20 8H44C46.209 8 48 9.791 48 12V32C48 40.8 40.3 47.3 32 51C23.7 47.3 16 40.8 16 32V12Z" fill="url(#brandMarkGradient)" />
+                <path d="M22 31L32 21L39 27.4V25.2C39 24.6 39.4 24.2 40 24.2H42.4C43 24.2 43.4 24.6 43.4 25.2V29.4L45 30.8C45.7 31.4 45.3 32.6 44.4 32.6H40.8V35.2C40.8 37.4 39 39.2 36.8 39.2H27.2C25 39.2 23.2 37.4 23.2 35.2V32.6H19.6C18.7 32.6 18.3 31.4 19 30.8L22 31Z" fill="#ffffff" />
+                <path d="M32 35C34.98 35 37.4 37.42 37.4 40.4C37.4 43.6 32 51 32 51C32 51 26.6 43.6 26.6 40.4C26.6 37.42 29.02 35 32 35Z" fill="#0A2C72" />
+                <circle cx="32" cy="40.1" r="2.8" fill="#ffffff" />
+              </svg>
+            </span>
+            <span class="brand-button__copy">
+              <span class="brand-button__title">
+                <span>Rent</span>
+                <span>Spot</span>
+              </span>
+              <span class="brand-button__subtitle">Find your next home.</span>
+            </span>
+          </button>
+
+          <div class="hero-top__actions">
+            <button class="icon-button icon-button--ghost has-badge" data-action="notifications" type="button" aria-label="Open notifications">
+              <span class="material-symbols-rounded">notifications_none</span>
+              <span class="badge">1</span>
+            </button>
+            <button class="icon-button icon-button--ghost" data-action="messages" type="button" aria-label="Open messages">
+              <span class="material-symbols-rounded">chat_bubble_outline</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="search-panel" id="searchPanel">
+          <div class="search-bar">
+            <span class="material-symbols-rounded search-bar__pin" aria-hidden="true">location_on</span>
+            <input class="search-bar__input" id="searchInput" type="search" placeholder="Search city, suburb, or area" />
+            <button class="search-bar__near" id="nearMeButton" type="button">
+              <span class="material-symbols-rounded">my_location</span>
+              <span>Near me</span>
+            </button>
+            <button class="search-bar__submit" id="searchButton" type="button">Search</button>
+          </div>
+
+          <div class="filter-row" id="filterRow">
+            <label class="filter-pill filter-pill--select filter-pill--icon" data-filter-name="filters">
+              <span class="material-symbols-rounded filter-pill__leading" aria-hidden="true">tune</span>
+              <select class="filter-pill__control" data-filter-select="filters" aria-label="Filters"></select>
+              <span class="material-symbols-rounded filter-pill__arrow" aria-hidden="true">expand_more</span>
+            </label>
+            <label class="filter-pill filter-pill--select" data-filter-name="price">
+              <select class="filter-pill__control" data-filter-select="price" aria-label="Price"></select>
+              <span class="material-symbols-rounded filter-pill__arrow" aria-hidden="true">expand_more</span>
+            </label>
+            <label class="filter-pill filter-pill--select" data-filter-name="type">
+              <select class="filter-pill__control" data-filter-select="type" aria-label="Type"></select>
+              <span class="material-symbols-rounded filter-pill__arrow" aria-hidden="true">expand_more</span>
+            </label>
+            <label class="filter-pill filter-pill--select" data-filter-name="bedrooms">
+              <select class="filter-pill__control" data-filter-select="bedrooms" aria-label="Bedrooms"></select>
+              <span class="material-symbols-rounded filter-pill__arrow" aria-hidden="true">expand_more</span>
+            </label>
+            <label class="filter-pill filter-pill--select" data-filter-name="more">
+              <select class="filter-pill__control" data-filter-select="more" aria-label="More filters"></select>
+              <span class="material-symbols-rounded filter-pill__arrow" aria-hidden="true">expand_more</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="category-grid" id="categoryGrid" aria-label="Property categories"></section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <h2>Quick Access</h2>
+            <button class="text-button" id="quickAccessButton" type="button">
+              <span>View all</span>
+              <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+          </div>
+          <div class="quick-grid" id="quickGrid"></div>
+        </section>
+
+        <section class="nearby-banner" id="nearbyBanner">
+          <div class="nearby-banner__copy">
+            <div class="nearby-banner__title">
+              <span class="material-symbols-rounded">location_on</span>
+              <span>Properties Near You</span>
+            </div>
+            <p>See homes and rooms near <strong id="nearbyLocationLabel">Strand, Cape Town</strong></p>
+          </div>
+
+          <svg class="nearby-banner__art" viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="#c7ebd8">
+              <rect x="154" y="14" width="18" height="42" rx="4" />
+              <rect x="177" y="6" width="26" height="50" rx="4" />
+              <rect x="206" y="20" width="16" height="36" rx="4" />
+              <rect x="24" y="24" width="14" height="32" rx="4" />
+              <rect x="44" y="14" width="18" height="42" rx="4" />
+              <rect x="66" y="28" width="12" height="28" rx="4" />
+            </g>
+            <g fill="#b6e4cd">
+              <circle cx="18" cy="64" r="10" />
+              <circle cx="86" cy="70" r="12" />
+              <circle cx="238" cy="68" r="13" />
+            </g>
+            <path d="M0 78H280" stroke="#7ed1a7" stroke-width="4" stroke-linecap="round" />
+            <g fill="#ffffff" stroke="#0d8a42" stroke-width="3" stroke-linejoin="round">
+              <path d="M95 67V49L108 38L121 49V67Z" />
+              <path d="M121 67V53L134 43L147 53V67Z" />
+              <path d="M146 67V47L162 35L178 47V67Z" />
+            </g>
+            <g fill="#0d8a42">
+              <path d="M232 12C238.627 12 244 17.373 244 24C244 31.8 232 44 232 44C232 44 220 31.8 220 24C220 17.373 225.373 12 232 12Z" />
+              <circle cx="232" cy="24" r="4" fill="#ffffff" />
+              <path d="M52 22C58.075 22 63 26.925 63 33C63 39.5 52 51 52 51C52 51 41 39.5 41 33C41 26.925 45.925 22 52 22Z" />
+              <circle cx="52" cy="33" r="4" fill="#ffffff" />
+            </g>
+            <g fill="#1b9a4f">
+              <circle cx="188" cy="60" r="8" />
+              <circle cx="204" cy="60" r="8" />
+              <rect x="184" y="60" width="24" height="12" rx="6" />
+            </g>
+          </svg>
+        </section>
+
+        <section class="section-block section-block--listings" id="featuredSection">
+          <div class="section-heading">
+            <h2>Featured Listings</h2>
+            <button class="text-button" id="viewAllListingsButton" type="button">
+              <span id="viewAllListingsText">View all</span>
+              <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+          </div>
+          <div class="listing-row" id="listingRow"></div>
+        </section>
+
+        <nav class="bottom-nav" id="bottomNav" aria-label="Primary navigation">
+          <button class="nav-tab is-active" data-action="home" data-tab="home" type="button">
+            <span class="material-symbols-rounded">home</span>
+            <span>Home</span>
+          </button>
+          <button class="nav-tab" data-action="search" data-tab="search" type="button">
+            <span class="material-symbols-rounded">search</span>
+            <span>Search</span>
+          </button>
+          <button class="nav-tab nav-tab--add" data-action="add-listing" data-tab="add" type="button">
+            <span class="nav-tab__fab">
+              <span class="material-symbols-rounded">add</span>
+            </span>
+            <span>Add Listing</span>
+          </button>
+          <button class="nav-tab" data-action="messages" data-tab="messages" type="button">
+            <span class="nav-tab__icon has-badge">
+              <span class="material-symbols-rounded">chat_bubble_outline</span>
+              <span class="badge badge--tiny">2</span>
+            </span>
+            <span>Messages</span>
+          </button>
+          <button class="nav-tab" data-action="profile" data-tab="profile" type="button">
+            <span class="material-symbols-rounded">person</span>
+            <span>Profile</span>
+          </button>
+        </nav>
+
+        <div class="home-indicator" aria-hidden="true"></div>
+      </main>
     </div>
 
-    <header class="topbar">
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="appNavPanel" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="brand" id="brandHomeBtn" role="button" tabindex="0" aria-label="Go to Home">
-        <img src="assets/rentspot-logo.svg" alt="RentSpot" class="site-logo" />
+    <div class="scrim" id="scrim" hidden></div>
+
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer__handle"></div>
+      <div class="drawer__header">
+        <strong>RentSpot</strong>
+        <button class="icon-button icon-button--surface icon-button--small" id="closeMenuButton" type="button" aria-label="Close navigation menu">
+          <span class="material-symbols-rounded">close</span>
+        </button>
       </div>
-      <button class="btn btn--primary" id="quickAddBtn">+ Add Listing</button>
-    </header>
+      <div class="drawer__list">
+        <button class="drawer__item" data-action="home" type="button">
+          <span class="material-symbols-rounded">home</span>
+          <span>Home</span>
+        </button>
+        <button class="drawer__item" data-action="search" type="button">
+          <span class="material-symbols-rounded">search</span>
+          <span>Search</span>
+        </button>
+        <button class="drawer__item" data-action="saved" type="button">
+          <span class="material-symbols-rounded">favorite</span>
+          <span>Saved Properties</span>
+        </button>
+        <button class="drawer__item" data-action="my-listings" type="button">
+          <span class="material-symbols-rounded">home_work</span>
+          <span>My Listings</span>
+        </button>
+        <button class="drawer__item" data-action="messages" type="button">
+          <span class="material-symbols-rounded">chat_bubble_outline</span>
+          <span>Messages</span>
+        </button>
+        <button class="drawer__item" data-action="help" type="button">
+          <span class="material-symbols-rounded">support_agent</span>
+          <span>Support</span>
+        </button>
+      </div>
+    </aside>
 
-    <main class="layout">
-      <aside class="nav-panel" id="appNavPanel">
-        <nav id="screenNav" class="screen-nav" aria-label="Primary">
-          <button class="screen-nav__item is-active" data-target="home">Home</button>
-          <button class="screen-nav__item" data-target="search">Search</button>
-          <button class="screen-nav__item" data-target="details">Property Details</button>
-          <button class="screen-nav__item" data-target="post">Post Listing</button>
-          <button class="screen-nav__item" data-target="messages">Messages</button>
-          <button class="screen-nav__item" data-target="profile">Profile</button>
-        </nav>
-      </aside>
+    <section class="sheet" id="listingSheet" aria-hidden="true">
+      <div class="sheet__header">
+        <div>
+          <p class="sheet__eyebrow">Listing details</p>
+          <h3 id="sheetTitle">Property Details</h3>
+        </div>
+        <button class="icon-button icon-button--surface icon-button--small" id="closeSheetButton" type="button" aria-label="Close listing details">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
 
-      <section class="screens">
-        <article class="screen" id="onboarding">
-          <div class="screen__head">
-            <h2>First-Time User Experience</h2>
-            <p>Splash, welcome choices, and quick signup/login.</p>
+      <img class="sheet__image" id="sheetImage" alt="" />
+
+      <div class="sheet__body">
+        <div class="sheet__price-row">
+          <strong class="sheet__price" id="sheetPrice">R0</strong>
+          <button class="save-pill" id="sheetSaveButton" type="button" aria-pressed="false">
+            <span class="material-symbols-rounded">favorite</span>
+            <span id="sheetSaveText">Save</span>
+          </button>
+        </div>
+
+        <p class="sheet__location" id="sheetLocation">-</p>
+        <p class="sheet__description" id="sheetDescription"></p>
+
+        <div class="feature-strip" id="sheetFeatures"></div>
+
+        <div class="sheet__actions">
+          <button class="sheet-action" data-action="chat-owner" type="button">
+            <span class="material-symbols-rounded">chat_bubble_outline</span>
+            <span>Chat</span>
+          </button>
+          <button class="sheet-action" data-action="call-owner" type="button">
+            <span class="material-symbols-rounded">call</span>
+            <span>Call</span>
+          </button>
+          <button class="sheet-action sheet-action--primary" data-action="request-viewing" type="button">
+            <span class="material-symbols-rounded">event_available</span>
+            <span>Viewing</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet sheet--form" id="listingFormSheet" aria-hidden="true">
+      <div class="sheet__header">
+        <div>
+          <p class="sheet__eyebrow">New listing</p>
+          <h3>Add Listing</h3>
+        </div>
+        <button class="icon-button icon-button--surface icon-button--small" id="closeFormButton" type="button" aria-label="Close add listing form">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <form class="listing-form" id="listingForm">
+        <label>
+          <span>Listing type</span>
+          <select name="listingType">
+            <option value="house">Rent a House</option>
+            <option value="room">Rent a Room</option>
+            <option value="shack">Shack</option>
+            <option value="buy">Buy Property</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Title</span>
+          <input name="title" type="text" placeholder="2 Bedroom Apartment in Hatfield" required />
+        </label>
+
+        <label>
+          <span>Location</span>
+          <input name="location" type="text" placeholder="Strand, Cape Town" required />
+        </label>
+
+        <label>
+          <span>Price (R)</span>
+          <input name="price" type="number" min="0" step="100" placeholder="7500" required />
+        </label>
+
+        <label>
+          <span>Listing photos</span>
+          <input id="listingPhotos" name="photos" type="file" accept="image/*" multiple required />
+          <span class="listing-form__hint" id="listingPhotoHint">Upload at least 3 photos of the property.</span>
+        </label>
+
+        <div class="photo-preview" id="listingPhotoPreview" aria-live="polite">
+          <p class="photo-preview__empty" id="listingPhotoEmpty">No photos selected yet.</p>
+        </div>
+
+        <button class="form-submit" type="submit">Publish Live</button>
+      </form>
+    </section>
+
+    <section class="sheet sheet--form" id="priceSheet" aria-hidden="true">
+      <div class="sheet__header">
+        <div>
+          <p class="sheet__eyebrow">Price</p>
+          <h3>Enter Custom Price</h3>
+        </div>
+        <button class="icon-button icon-button--surface icon-button--small" id="closePriceButton" type="button" aria-label="Close price form">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <form class="listing-form" id="priceForm">
+        <p class="sheet__copy">Set a minimum or maximum amount and the listings update immediately when you apply it.</p>
+
+        <label>
+          <span>Minimum price (R)</span>
+          <input name="minPrice" type="number" min="0" step="100" placeholder="0" />
+        </label>
+
+        <label>
+          <span>Maximum price (R)</span>
+          <input name="maxPrice" type="number" min="0" step="100" placeholder="10000" />
+        </label>
+
+        <button class="form-submit" type="submit">Apply Live Filter</button>
+      </form>
+    </section>
+
+    <section class="sheet sheet--form" id="locationSheet" aria-hidden="true">
+      <div class="sheet__header">
+        <div>
+          <p class="sheet__eyebrow">Near Me</p>
+          <h3>Enter Your Current Location</h3>
+        </div>
+        <button class="icon-button icon-button--surface icon-button--small" id="closeLocationButton" type="button" aria-label="Close location form">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <form class="listing-form" id="locationForm">
+        <p class="sheet__copy">Use your current suburb and city to show listings in that area. The default is Strand, Cape Town.</p>
+
+        <label>
+          <span>Suburb or area</span>
+          <input name="area" type="text" value="Strand" placeholder="Strand" required />
+        </label>
+
+        <label>
+          <span>City</span>
+          <input name="city" type="text" value="Cape Town" placeholder="Cape Town" required />
+        </label>
+
+        <button class="form-submit" type="submit">Show Nearby Listings</button>
+      </form>
+    </section>
+
+    <section class="sheet sheet--form sheet--auth" id="authSheet" aria-hidden="true">
+      <div class="sheet__header">
+        <div>
+          <p class="sheet__eyebrow">Profile</p>
+          <h3 id="authSheetTitle">Login to RentSpot</h3>
+        </div>
+        <button class="icon-button icon-button--surface icon-button--small" id="closeAuthButton" type="button" aria-label="Close profile form">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <div class="auth-guest" id="authGuestView">
+        <div class="auth-switch" role="tablist" aria-label="Authentication options">
+          <button class="auth-tab is-active" data-auth-mode="login" type="button" role="tab" aria-selected="true">Login</button>
+          <button class="auth-tab" data-auth-mode="signup" type="button" role="tab" aria-selected="false">Create Account</button>
+        </div>
+
+        <p class="auth-copy" id="authCopy">Login to save properties, message owners, and manage your listings.</p>
+
+        <form class="listing-form auth-form" id="loginForm">
+          <label>
+            <span>Email address</span>
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Enter your password" required />
+          </label>
+
+          <button class="form-submit" type="submit">Login</button>
+        </form>
+
+        <form class="listing-form auth-form" id="signupForm" hidden>
+          <label>
+            <span>Full name</span>
+            <input name="name" type="text" placeholder="Lerato Mokoena" required />
+          </label>
+
+          <label>
+            <span>Phone number</span>
+            <input name="phone" type="tel" placeholder="+27 82 123 4567" required />
+          </label>
+
+          <label>
+            <span>Email address</span>
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input name="password" type="password" placeholder="Create a password" required />
+          </label>
+
+          <label>
+            <span>Confirm password</span>
+            <input name="confirmPassword" type="password" placeholder="Confirm your password" required />
+          </label>
+
+          <button class="form-submit" type="submit">Create Account</button>
+        </form>
+      </div>
+
+      <div class="auth-account" id="authAccountView" hidden>
+        <div class="auth-account__card">
+          <span class="material-symbols-rounded">verified_user</span>
+          <div>
+            <strong id="accountName">Guest</strong>
+            <p id="accountMeta">-</p>
           </div>
+        </div>
 
-          <div class="cards cols-2">
-            <section class="card card--welcome reveal">
-              <h3>Welcome</h3>
-              <p>Choose your path in one tap.</p>
-              <div class="cta-grid">
-                <button class="btn btn--primary">Find a place</button>
-                <button class="btn btn--ghost" id="openListingLoginBtn">List a property</button>
-              </div>
-            </section>
-
-            <section class="card reveal">
-              <h3>Sign Up / Login</h3>
-              <form class="form-grid" id="authForm">
-                <label>
-                  Phone Number
-                  <input type="tel" placeholder="e.g. +27 82 123 4567" required />
-                </label>
-                <button class="btn btn--soft" type="button">Send OTP</button>
-                <p class="muted center">or continue with email</p>
-                <label>
-                  Email Address
-                  <input type="email" placeholder="name@email.com" required />
-                </label>
-                <button class="btn btn--primary" type="submit">Continue</button>
-              </form>
-            </section>
+        <div class="auth-account__details">
+          <div class="auth-detail">
+            <span>Phone</span>
+            <strong id="accountPhone">-</strong>
           </div>
-        </article>
-
-        <article class="screen" id="listing-login">
-          <div class="screen__head">
-            <h2>Login To Create Listing</h2>
-            <p>Please sign in first before posting a room, rental house, or property for sale.</p>
+          <div class="auth-detail">
+            <span>Email</span>
+            <strong id="accountEmail">-</strong>
           </div>
+        </div>
 
-          <section class="card reveal">
-            <h3>Access Your Listing Account</h3>
-            <form class="form-grid" id="listingLoginForm">
-              <label>
-                Phone Number
-                <input type="tel" placeholder="e.g. +27 82 123 4567" required />
-              </label>
-              <button class="btn btn--soft" type="button">Send OTP</button>
-              <p class="muted center">or continue with email</p>
-              <label>
-                Email Address
-                <input type="email" placeholder="name@email.com" required />
-              </label>
-              <label>
-                Password
-                <input type="password" placeholder="Enter your password" required />
-              </label>
-              <button class="btn btn--primary" type="submit">Login And Continue</button>
-            </form>
-          </section>
-        </article>
+        <p class="auth-copy">Your saved properties, messages, and future listings can be linked to this profile.</p>
 
-        <article class="screen is-active" id="home">
-          <div class="screen__head">
-            <h2>Home Screen</h2>
-            <p>Search, categories, featured picks, and nearby options.</p>
-          </div>
+        <button class="form-submit" data-action="logout" type="button">Log Out</button>
+      </div>
+    </section>
 
-          <section class="card reveal">
-            <div class="search-line">
-              <input id="homeSearch" type="search" placeholder="Search location, suburb, or landmark" />
-              <button class="btn btn--primary" id="homeSearchBtn">Search</button>
-            </div>
-
-            <div class="chip-row">
-              <button class="chip is-selected" data-type="house">Rent a House</button>
-              <button class="chip" data-type="room">Rent a Room</button>
-              <button class="chip" data-type="buy">Buy Property</button>
-            </div>
-          </section>
-
-          <section class="card reveal">
-            <h3 class="section-label">Quick Access</h3>
-            <div class="flow-grid">
-              <button class="flow-card flow-card--search" data-target="search">
-                <span class="flow-card__icon">🔍</span>
-                <span class="flow-card__name">Search</span>
-              </button>
-              <button class="flow-card flow-card--details" data-target="details">
-                <span class="flow-card__icon">🏠</span>
-                <span class="flow-card__name">Property Details</span>
-              </button>
-              <button class="flow-card flow-card--post" data-target="post">
-                <span class="flow-card__icon">📋</span>
-                <span class="flow-card__name">Post Listing</span>
-              </button>
-              <button class="flow-card flow-card--messages" data-target="messages">
-                <span class="flow-card__icon">💬</span>
-                <span class="flow-card__name">Messages</span>
-              </button>
-              <button class="flow-card flow-card--profile" data-target="profile">
-                <span class="flow-card__icon">👤</span>
-                <span class="flow-card__name">Profile</span>
-              </button>
-            </div>
-          </section>
-
-          <div class="cards cols-2">
-            <section class="card reveal">
-              <h3>Featured Listings</h3>
-              <div id="featuredGrid" class="listing-grid"></div>
-            </section>
-
-            <section class="card reveal">
-              <h3>Near You</h3>
-              <div id="nearGrid" class="listing-grid"></div>
-            </section>
-          </div>
-        </article>
-
-        <article class="screen" id="search">
-          <div class="screen__head">
-            <h2>Search Flow</h2>
-            <p>Type location, filter by budget and type, then open details.</p>
-          </div>
-
-          <section class="card reveal">
-            <div class="form-grid filters-grid">
-              <label>
-                Location
-                <input id="locationInput" type="text" placeholder="Strand / Somerset West / Gordon's Bay" value="Strand" />
-              </label>
-              <label>
-                Max Price (R)
-                <input id="priceInput" type="number" min="0" step="500" value="12000" />
-              </label>
-              <label>
-                Rooms
-                <select id="roomsInput">
-                  <option value="any">Any</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3+</option>
-                </select>
-              </label>
-              <label>
-                Type
-                <select id="typeInput">
-                  <option value="any">Any</option>
-                  <option value="house">Rent a House</option>
-                  <option value="room">Rent a Room</option>
-                  <option value="buy">Buy Property</option>
-                </select>
-              </label>
-            </div>
-            <button class="btn btn--primary" id="applySearchBtn">Apply Filters</button>
-          </section>
-
-          <section class="card reveal">
-            <div class="stack-head">
-              <h3>Results</h3>
-              <span class="muted" id="resultCount">0 properties</span>
-            </div>
-            <div id="searchResults" class="listing-grid listing-grid--wide"></div>
-          </section>
-        </article>
-
-        <article class="screen" id="details">
-          <div class="screen__head">
-            <h2>Property Details</h2>
-            <p>Image gallery, price, map preview, and direct contact actions.</p>
-          </div>
-
-          <section class="card reveal">
-            <div class="gallery" id="imageGallery"></div>
-            <div class="details-row">
-              <div>
-                <h3 id="detailsTitle">Select a property</h3>
-                <p class="price" id="detailsPrice">R 0</p>
-                <p class="muted" id="detailsLocation">-</p>
-              </div>
-              <button class="btn btn--soft" id="saveBtn" type="button">Save</button>
-            </div>
-            <p id="detailsDescription" class="description">Property description appears here after you choose a listing.</p>
-
-            <div class="map-box" id="mapBox">
-              <p>Location map preview</p>
-              <span id="mapText">No location selected.</span>
-            </div>
-
-            <div class="cta-grid cta-grid--3">
-              <button class="btn btn--ghost">Chat</button>
-              <button class="btn btn--ghost">Call</button>
-              <button class="btn btn--primary">Request Viewing</button>
-            </div>
-          </section>
-        </article>
-
-        <article class="screen" id="post">
-          <div class="screen__head">
-            <h2>Post a Listing</h2>
-            <p>Pick a listing package, add details, then continue to payment.</p>
-          </div>
-
-          <section class="card reveal">
-            <h3>Choose Listing Type</h3>
-            <div class="plan-grid" id="planGrid">
-              <label class="plan is-selected">
-                <input type="radio" name="plan" value="room" checked />
-                <strong>Room</strong>
-                <span>R50</span>
-              </label>
-              <label class="plan">
-                <input type="radio" name="plan" value="house" />
-                <strong>Rental House</strong>
-                <span>R70</span>
-              </label>
-              <label class="plan">
-                <input type="radio" name="plan" value="sale" />
-                <strong>Sale</strong>
-                <span>R100</span>
-              </label>
-            </div>
-          </section>
-
-          <section class="card reveal">
-            <h3>Listing Form</h3>
-            <form id="listingForm" class="form-grid">
-              <label>
-                Title
-                <input type="text" required placeholder="Cozy room near city center" />
-              </label>
-              <label>
-                Description
-                <textarea rows="4" required placeholder="Describe the property, amenities, and nearby features"></textarea>
-              </label>
-              <label>
-                Price (R)
-                <input type="number" min="0" step="100" required placeholder="7500" />
-              </label>
-              <label>
-                Location
-                <input type="text" required placeholder="Strand, Somerset West, or Gordon's Bay" />
-              </label>
-              <label>
-                Photos Upload
-                <input type="file" multiple accept="image/*" />
-              </label>
-              <button class="btn btn--primary" type="submit">Continue to Payment</button>
-            </form>
-          </section>
-
-          <section class="card reveal hidden" id="paymentCard">
-            <h3>Payment</h3>
-            <p class="muted">Choose payment method</p>
-            <div class="chip-row">
-              <button class="chip is-selected" data-payment="card">Card</button>
-              <button class="chip" data-payment="eft">EFT</button>
-            </div>
-            <button class="btn btn--primary" id="payBtn" type="button">Pay and Submit Listing</button>
-            <p class="status" id="reviewStatus"></p>
-          </section>
-        </article>
-
-        <article class="screen" id="messages">
-          <div class="screen__head">
-            <h2>Messages</h2>
-            <p>Inbox list and chat UI inspired by modern messaging apps.</p>
-          </div>
-
-          <section class="card reveal chat-layout">
-            <aside class="inbox" id="inboxList"></aside>
-            <section class="chat" id="chatPanel">
-              <div class="chat__head" id="chatHead">Select a conversation</div>
-              <div class="chat__body" id="chatBody"></div>
-              <form class="chat__composer" id="chatForm">
-                <input id="chatInput" type="text" placeholder="Type message..." />
-                <button class="btn btn--primary" type="submit">Send</button>
-              </form>
-            </section>
-          </section>
-        </article>
-
-        <article class="screen" id="profile">
-          <div class="screen__head">
-            <h2>Profile</h2>
-            <p>Manage listings, saved properties, and payment history.</p>
-          </div>
-
-          <div class="cards cols-2">
-            <section class="card reveal">
-              <h3>My Listings</h3>
-              <ul class="list">
-                <li>Room in Observatory - Under Review</li>
-                <li>2-Bed Apartment in Claremont - Live</li>
-              </ul>
-              <button class="btn btn--ghost">Manage Listings</button>
-            </section>
-
-            <section class="card reveal">
-              <h3>Saved Properties</h3>
-              <ul class="list">
-                <li>Family Home in Bellville</li>
-                <li>Studio near UCT</li>
-              </ul>
-              <button class="btn btn--ghost">View Saved</button>
-            </section>
-
-            <section class="card reveal">
-              <h3>Edit Profile</h3>
-              <ul class="list">
-                <li>Name, phone, and email</li>
-                <li>Verification and identity</li>
-              </ul>
-              <button class="btn btn--ghost">Edit Profile</button>
-            </section>
-
-            <section class="card reveal">
-              <h3>Payment History</h3>
-              <ul class="list">
-                <li>Room Listing Fee - R50</li>
-                <li>Rental House Listing Fee - R70</li>
-              </ul>
-              <button class="btn btn--ghost">Download Receipts</button>
-            </section>
-          </div>
-        </article>
-      </section>
-    </main>
-    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
     <script src="app.js"></script>
   </body>
